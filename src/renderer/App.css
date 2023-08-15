@@ -1,0 +1,138 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+  font-family: sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  height: fit-content;
+  width: fit-content;
+  margin: 10px;
+}
+
+a:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.main {
+  display: flex;
+  position: relative;
+}
+
+.categoryList {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 140px;
+  overflow: scroll;
+  padding: 10px;
+  opacity: 0;
+  /* 滚动丝滑 */
+  -webkit-overflow-scrolling: touch;
+  transition: all 0.3s ease-in-out;
+}
+
+.categoryList:hover {
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.categoryItem {
+  position: relative;
+  margin-bottom: 3px;
+  cursor: pointer;
+}
+
+.categoryItem-img {
+  width: 100%;
+}
+
+.categoryItem-title {
+  display: none;
+}
+
+.screen {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100vh;
+}
+
+.screen-item {
+  width: 100%;
+  height: 100%;
+}
+
+.screen-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pagination {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 20px;
+  width: 100%;
+  backdrop-filter: blur(4px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #00000010;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.pagination:hover {
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.pagination button {
+  height: 30px;
+  border-radius: 3px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-weight: bold;
+}
+
+.pagination button:hover {
+  background: #fff;
+  color: #000;
+  transition: all 0.3s ease-in-out;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination button:disabled:hover {
+  background: transparent;
+  color: #fff;
+}
