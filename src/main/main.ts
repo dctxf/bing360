@@ -11,6 +11,7 @@
 import {
   BrowserWindow,
   BrowserWindowConstructorOptions,
+  Notification,
   app,
   ipcMain,
   shell,
@@ -18,9 +19,8 @@ import {
 import log from 'electron-log';
 import { autoUpdater } from 'electron-updater';
 import path from 'path';
-import { setWallpaper } from '../utils/wallpaper';
 import MenuBuilder from './menu';
-import { resolveHtmlPath } from './util';
+import { resolveHtmlPath, setWallpaperWith } from './util';
 
 class AppUpdater {
   constructor() {
@@ -34,7 +34,16 @@ let mainWindow: BrowserWindow | null = null;
 
 // 设置壁纸
 ipcMain.on('ipc-setWallpaper', async (event, arg) => {
-  await setWallpaper(arg);
+  await setWallpaperWith(arg);
+  const isAllowed = Notification.isSupported();
+  if (isAllowed) {
+    const notification = new Notification({
+      title: '壁纸更换成功',
+      body: '享受美好心情吧！~~',
+      silent: true, // 系统默认的通知声音
+    });
+    notification.show();
+  }
 });
 
 if (process.env.NODE_ENV === 'production') {
@@ -83,7 +92,7 @@ const createWindow = async () => {
     skipTaskbar: true,
     autoHideMenuBar: true,
     // transparent: true,
-    titleBarStyle: 'hiddenInset',
+    // titleBarStyle: 'hiddenInset',
     icon: getAssetPath('icon.png'),
     // 拖动
     webPreferences: {

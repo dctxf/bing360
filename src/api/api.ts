@@ -14,7 +14,7 @@ const apiByBing = ky.create({ prefixUrl: bingBaseURL });
 // "http://wp.birdpaper.com.cn/intf/GetListByCategory?cids={cid}&pageno={start}&count={count}"
 // 获取360壁纸分类
 export type QihuCategoryParams = {
-  cids: string;
+  cids?: string;
   pageno: number;
   count: number;
 };

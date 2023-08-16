@@ -27,5 +27,13 @@
     "package-lock.json": true,
     "*.{css,sass,scss}.d.ts": true
   },
-  "cSpell.words": ["cids", "edata", "intf", "osascript", "pageno"]
+  "cSpell.words": [
+    "cids",
+    "edata",
+    "intf",
+    "osascript",
+    "pageno",
+    "tempfile",
+    "tempy"
+  ]
 }

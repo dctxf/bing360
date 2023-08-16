@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { useRequest } from 'ahooks';
+import { useLocalStorageState, useRequest } from 'ahooks';
 import {
   QihuCategoryParams,
   getQihuCategory,
   getQihuCategoryDetail,
 } from 'api/api';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Route, MemoryRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 
@@ -20,11 +20,16 @@ function Hello() {
     { manual: true }
   );
 
-  const [selected, setSelected] = useState<QihuCategoryParams>({
-    pageno: 1,
-    count: DEFAULT_PAGE_SIZE,
-    cids: '',
-  });
+  const [selected, setSelected] = useLocalStorageState<QihuCategoryParams>(
+    'selected-params',
+    {
+      defaultValue: {
+        pageno: 1,
+        count: DEFAULT_PAGE_SIZE,
+        cids: '',
+      },
+    }
+  );
 
   useEffect(() => {
     if (selected) {
@@ -92,11 +97,11 @@ function Hello() {
           type="button"
           onClick={() => {
             onSelect({
-              ...selected,
-              pageno: selected.pageno - 1,
+              ...selected!,
+              pageno: selected!.pageno - 1,
             });
           }}
-          disabled={selected.pageno === 1}
+          disabled={selected!.pageno === 1}
         >
           上一页
         </button>
@@ -104,11 +109,11 @@ function Hello() {
           type="button"
           onClick={() => {
             onSelect({
-              ...selected,
-              pageno: selected.pageno + 1,
+              ...selected!,
+              pageno: selected!.pageno + 1,
             });
           }}
-          disabled={selected.pageno === categoryDetail?.data.total_page}
+          disabled={selected!.pageno === categoryDetail?.data.total_page}
         >
           下一页
         </button>
